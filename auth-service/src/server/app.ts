@@ -1,4 +1,5 @@
 import express from 'express';
+import userRoutes from '../routes/user-routes';
 
 class App {
 
@@ -15,7 +16,7 @@ class App {
   }
 
   private routes(): void {
-
+    this.express.use('/users', userRoutes);
   }
 
 }
