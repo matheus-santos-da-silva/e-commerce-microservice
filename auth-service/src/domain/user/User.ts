@@ -1,27 +1,20 @@
+import { Schema } from 'mongoose';
+import mongoose from '../../database/connection';
 import { UserDTO } from './UserDTO';
 
-export class User {
-
-  private props: UserDTO;
-
-  get id() {
-    return this.props.id;
+const UserSchema = new Schema<UserDTO>({
+  email: { 
+    type: String,
+    required: true
+  },
+  name: { 
+    type: String,
+    required: true
+  },
+  password: { 
+    type: String,
+    required: true
   }
+}, { timestamps: true });
 
-  get email() {
-    return this.props.email;
-  }
-
-  get name() {
-    return this.props.name;
-  }
-
-  get password() {
-    return this.props.password;
-  }
-
-  constructor(props: UserDTO) {
-    this.props = props;
-  }
-
-}
+export const User = mongoose.model('User', UserSchema);
