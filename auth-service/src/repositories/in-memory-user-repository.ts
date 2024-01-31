@@ -13,10 +13,6 @@ export class InMemoryUserRepository implements UserRepositoryProtocol {
     this.items.push(user);
   }
   
-  signIn(): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
-  
   async findUserByEmail(email: string): Promise<UserDTO | null> {
     const user = this.items.find((item) => item.email === email);
     if(!user) return null;
