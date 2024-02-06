@@ -1,5 +1,3 @@
-import { Product } from '../models/product';
-
 export interface CreateProductModel {
   name: string
   price: number
@@ -7,6 +5,11 @@ export interface CreateProductModel {
   quantity: number
 }
 
+export interface CreateProductResponse {
+  message: string
+  statusCode: number
+}
+
 export abstract class CreateProduct {
-  abstract create(product: CreateProductModel): Promise<Product>
+  abstract create(product: CreateProductModel): Promise<CreateProductResponse>
 }
