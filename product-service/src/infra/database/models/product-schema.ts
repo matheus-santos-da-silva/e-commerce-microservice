@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import mongoose from '../../infra/database/connection';
-import { Product } from '../../domain/models/product';
+import mongoose from '../connection';
+import { Product } from '../../../domain/models/product';
 
 const ProductSchema = new Schema<Product>({
   name: { 
