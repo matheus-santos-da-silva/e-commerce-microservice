@@ -3,7 +3,7 @@ import { CreateProductRepository } from '../../../data/protocols/db-create-produ
 import { Product } from '../../../domain/models/product';
 import { CreateProductModel } from '../../../domain/use-cases/create-product';
 import { BuyProductModel } from '../../../domain/use-cases/buy-product';
-import { ProductModel } from '../../models/product-schema';
+import { ProductModel } from '../models/product-schema';
 
 export class ProductMongoDBRepository 
 implements 
