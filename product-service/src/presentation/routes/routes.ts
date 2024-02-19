@@ -7,10 +7,11 @@ import { ProductModel } from '../../infra/database/models/product-schema';
 import { validationMiddleware } from '../../data/utils/middleware/validation';
 import { CreateProductValidationSchema } from '../../data/utils/validations-schemas/create-product-validation-schema';
 import { RabbitMQMessagingService } from '../../infra/rabbitMQ/rabbitMQ';
+import { checkAuthentication } from '../../data/utils/middleware/check-authenticationts'; 
 
 const router = Router();
 
-router.post('/create', validationMiddleware(CreateProductValidationSchema) , async (request: Request, response: Response) => {
+router.post('/create', checkAuthentication(), validationMiddleware(CreateProductValidationSchema) , async (request: Request, response: Response) => {
   const mongoRepository = new ProductMongoDBRepository(ProductModel);
   const messagingRepository = new RabbitMQMessagingService(`${process.env.URI}`);
   const createProductUseCase = new CreateProductImplementation(mongoRepository, messagingRepository);
