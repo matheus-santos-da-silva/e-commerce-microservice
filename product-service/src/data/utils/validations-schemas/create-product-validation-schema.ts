@@ -1,11 +1,7 @@
 import { z } from 'zod';
 
 export const CreateProductValidationSchema = z.object({
-  code: z.string({
-    required_error: 'Code is required',
-    invalid_type_error: 'Code must be a string'
-  }),
-
+  
   name: z.string({
     required_error: 'Name is required',
     invalid_type_error: 'Name must be a string'

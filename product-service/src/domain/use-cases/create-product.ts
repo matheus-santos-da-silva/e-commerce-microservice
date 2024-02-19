@@ -1,7 +1,6 @@
 export interface CreateProductModel {
   name: string
   price: number
-  code: string
   quantity: number
 }
 

@@ -8,14 +8,12 @@ export class CreateProductController {
   async execute(request: Request, response: Response): Promise<void> {
 
     const {
-      code,
       name,
       price,
       quantity
     }: CreateProductModel = request.body;
 
     const { message, statusCode } = await this.createProduct.create({
-      code,
       name,
       price,
       quantity
