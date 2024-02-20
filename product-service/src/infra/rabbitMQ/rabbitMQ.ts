@@ -14,6 +14,7 @@ export class RabbitMQMessagingService implements MessagingServiceRepository{
     this.channel = await this.conn.createChannel();
   }
   async publishInQueue(queue: string, message: string): Promise<boolean> {
+    await this.channel.assertQueue(queue, { durable: true });
     return this.channel.sendToQueue(queue, Buffer.from(message));
   }
 
