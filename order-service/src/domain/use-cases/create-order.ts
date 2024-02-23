@@ -1,14 +1,8 @@
-import { OrderItems } from '../models/order-items';
-
 export interface CreateOrderModel {
-  orderItems: OrderItems[]
+  orderItems: [{ productId: string, quantity: number, price: number, name: string, code: string }]
+  customer: { email: string, name: string, externalId: string }
 }
 
-export interface CreateOrderResponse {
-  message: string
-  statusCode: number
-}  
-
 export abstract class CreateOrder {
-  abstract create(order: CreateOrderModel): Promise<CreateOrderResponse>
+  abstract create(order: CreateOrderModel): Promise<void>
 }
