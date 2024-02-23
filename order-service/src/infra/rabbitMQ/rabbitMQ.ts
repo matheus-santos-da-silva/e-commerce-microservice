@@ -22,7 +22,7 @@ export class RabbitMQMessagingService implements MessagingServiceRepository{
     return this.channel.consume(queue, (message) => {
       if(message !== null) {
         callback(message);
-        this.channel.ack;
+        this.channel.ack(message);
       }
     });
   }
