@@ -2,7 +2,6 @@ import { BuyProductsRepository } from '../../../data/protocols/db-buy-products';
 import { CreateProductRepository } from '../../../data/protocols/db-create-product';
 import { Product } from '../../../domain/models/product';
 import { CreateProductModel } from '../../../domain/use-cases/create-product';
-import { BuyProductsModel } from '../../../domain/use-cases/buy-products';
 import { ProductModel } from '../models/product-schema';
 
 export class ProductMongoDBRepository 
@@ -27,10 +26,10 @@ implements
     return null; 
   }
 
-  async checkProductsStock(products: [{ productId: string; quantity: number; }]): Promise<boolean> {
+  async checkProductsStock(products: [{ code: string, name: string,quantity: number, price: number }]): Promise<boolean> {
     
     const checkProductsStock = products.map(async (product) => {
-      const prod = await this.mongoProductModel.findById(product.productId);
+      const prod = await this.mongoProductModel.findOne({ code: product.code });
       return prod!.quantity >= product.quantity;
     });
 

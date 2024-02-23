@@ -16,7 +16,7 @@ export class BuyProductsImplementation implements BuyProducts {
 
     // take the credentials of user
     const tokenParts = token.split('.');
-    const { email, name } = JSON.parse(Buffer.from(tokenParts[1], 'base64').toString('utf-8')) as { email: string, name: string }; 
+    const { email, externalId, name } = JSON.parse(Buffer.from(tokenParts[1], 'base64').toString('utf-8')) as { email: string, name: string, externalId: string }; 
 
     const checkProductsStock = await this.buyProductRepository.checkProductsStock(products);
     if(!checkProductsStock) return {
@@ -25,8 +25,8 @@ export class BuyProductsImplementation implements BuyProducts {
     };
 
     await this.messagingService.start();
-    await this.messagingService.publishInQueue('BUY_PRODUTS', JSON.stringify({
-      customer: { email, name },
+    await this.messagingService.publishInQueue('BUY_PRODUCTS', JSON.stringify({
+      customer: { email, name, externalId },
       products
     }));
  

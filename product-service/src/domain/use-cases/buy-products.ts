@@ -4,7 +4,7 @@ export interface BuyProductsResponse {
 }
 
 export interface BuyProductsModel {
-  products: [ { productId: string, quantity: number } ]
+  products: [{ code: string, name: string, quantity: number, price: number }]
   token: string
 }
 

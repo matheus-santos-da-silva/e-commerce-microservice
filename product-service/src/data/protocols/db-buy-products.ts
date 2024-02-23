@@ -1,3 +1,3 @@
 export interface BuyProductsRepository {
-  checkProductsStock(products: [ { productId: string, quantity: number } ]): Promise<boolean>
+  checkProductsStock(products: [{ quantity: number, price: number, code: string, name: string }]): Promise<boolean>
 }
