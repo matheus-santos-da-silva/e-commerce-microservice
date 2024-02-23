@@ -12,9 +12,10 @@ const OrderSchema = new Schema<Order>({
 
   orderItems: {
     type: [{
-      product: {} as Product,
-      quantity: Number,
-      orderId: String
+      name: String,
+      price: Number,
+      code: String,
+      quantity: Number
     }]
   },
 
