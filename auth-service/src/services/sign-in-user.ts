@@ -36,6 +36,7 @@ export class SignInUser {
     };
 
     const token = await createUserToken({
+      externalId: user.id,
       email,
       name: user.name
     });

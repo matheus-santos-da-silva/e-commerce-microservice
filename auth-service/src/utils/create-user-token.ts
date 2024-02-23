@@ -1,6 +1,7 @@
 import { sign } from 'jsonwebtoken';
 
 interface payload {
+  externalId: string
   email: string
   name: string
 }
