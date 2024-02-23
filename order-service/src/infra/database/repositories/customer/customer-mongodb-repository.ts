@@ -8,8 +8,9 @@ export class CustomerMongoDBRepository implements CustomerRepository {
     private customerModel: typeof CustomerModel
   ) {}
 
-  async create({ email, externalId, name }: Customer): Promise<void> {
-    await this.customerModel.create({ email, externalId, name });
+  async create({ email, externalId, name }: Customer): Promise<Customer> {
+    const customer = await this.customerModel.create({ email, externalId, name });
+    return customer;
   }
 }
   
