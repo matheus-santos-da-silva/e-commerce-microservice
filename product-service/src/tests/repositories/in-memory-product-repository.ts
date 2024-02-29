@@ -1,22 +1,34 @@
-import { BuyProductRepository } from '../../data/protocols/db-buy-product';
+import { BuyProductsRepository } from '../../data/protocols/db-buy-products';
 import { CreateProductRepository } from '../../data/protocols/db-create-product';
+import { generateProductCode } from '../../data/utils/generate-product-code';
 import { Product } from '../../domain/models/product';
-import { BuyProductModel } from '../../domain/use-cases/buy-product';
 import { CreateProductModel } from '../../domain/use-cases/create-product';
 import { randomUUID } from 'node:crypto';
 
 export class InMemoryProductRepository 
 implements 
 CreateProductRepository,
-BuyProductRepository {
+BuyProductsRepository {
   
   items: Product[] = [];
 
-  async buy(products: BuyProductModel): Promise<void> {
-    throw new Error('Method not implemented.');
+  async checkProductsStock(products: [{ quantity: number; price: number; code: string; name: string; }]): Promise<boolean> {
+    const checkProductsStock = products.map( async (product) => {
+      const prod = this.items.find((item) => item.code === product.code);
+      return prod!.quantity >= product.quantity;
+    });
+
+    const results = await Promise.all(checkProductsStock);
+    return !results.includes(false);
   }
+
   async create( product: CreateProductModel): Promise<void> {
-    this.items.push({ id: randomUUID(), ...product });
+    const prod = {
+      id: randomUUID(),
+      code: generateProductCode(),
+      ...product 
+    };
+    this.items.push(prod);
   }
 
   async getProductByCode(code: string): Promise<Product | null> {
